@@ -19,7 +19,8 @@
 <script type="text/javascript">
 function main() {
 	let cube;
-	let sphere;
+	let earth;
+	let moon;
 	
 	//렌더링 할 요소와 화면 크기를 설정
 	const renderer = new THREE.WebGLRenderer();
@@ -32,30 +33,65 @@ function main() {
 	//카메라
 	//시야각, 종횡비, near, far : near보다 가까이 있거나 far보다 멀리있는 오브젝트 랜더링 하지 않음
 	const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000 );
-	
+		
 	//기하학 객체
 	const boxGeo = new THREE.BoxGeometry(); 
-	const sphereGeo = new THREE.SphereGeometry(0.5, 30, 30);
+	const earthGeo = new THREE.SphereGeometry(1, 30, 30);
+	const moonGeo = new THREE.SphereGeometry(0.5, 30, 30);
 	const loader = new THREE.TextureLoader();
 
 	//Object3D를 상속받는 Mesh 객체 반환
 	//Object3D의 position속성(Vector Object) 확인
+	cube = new THREE.Mesh(boxGeo, new THREE.MeshToonMaterial( { color: "yellow" } ));
 	{
 		const material = new THREE.MeshPhongMaterial({map: loader.load('resources/image/texture/earth.png')}); 
-		cube = new THREE.Mesh(boxGeo, material);
+		earth = new THREE.Mesh(earthGeo, material);
 	}
 	{
 		const material = new THREE.MeshPhongMaterial({map: loader.load('resources/image/texture/moon.png')}); 
-		sphere = new THREE.Mesh(sphereGeo, material);
+		moon = new THREE.Mesh(moonGeo, material);
 	}
-	
 	 
 	cube.position.z = -5; //z좌표
-	sphere.position.z = -5; //z좌표
-	sphere.position.x = 3; //x좌표
+	earth.position.z = -5; //z좌표
+	earth.position.x = -3; //z좌표
+	moon.position.z = -5; //x좌표
+	moon.position.x = 3; //x좌표
 	
 	scene.add(cube);
-	scene.add(sphere);
+	scene.add(earth);
+	scene.add(moon);
+	
+	//글씨 출력
+	{
+		//json파일을 받아온 후 object를 그려야 함으로 promise를 만들어서  async를 사용한다.
+		const loader = new THREE.FontLoader();
+		  // promisify font loading
+		function loadFont(url) {
+		    return new Promise((resolve, reject) => {
+		      loader.load(url, resolve);
+		    });
+		}
+		
+		async function doit() {
+		    const font = await loadFont('resources/fonts/helvetiker_regular.typeface.json');  /* threejsfundamentals: url */
+		    const geometry = new THREE.TextGeometry('hello three.js', {
+		      font: font,
+		      size: 0.5,
+		      height: 0.05
+		    });
+		    
+		    const text = new THREE.Mesh(geometry, material);
+		    const parent = new THREE.Object3D();
+		    parent.add(text);
+		    parent.scale.x = 1;
+		    parent.position.z = -5;
+		    parent.position.x = -6;
+		 	scene.add(parent);
+		  }
+		
+		doit();
+	}
 	
 	const light = new THREE.DirectionalLight("white", 1); //reference 에서 target 확인
 	light.target = cube; //빛을 쏘는 지점을 cube로 설정

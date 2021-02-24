@@ -23,26 +23,33 @@ function main() {
 	renderer.setSize( window.innerWidth, window.innerHeight );
 	document.querySelector('#c').appendChild(renderer.domElement);	
 	
-	const scene = new THREE.Scene(); //공간
+	//공간
+	const scene = new THREE.Scene();
 	scene.background = new THREE.Color("skyblue");
-	//카메라 : 시야각, 종횡비, near, far : near보다 가까이 있거나 far보다 멀리있는 오브젝트 랜더링 하지 않음
+	//카메라
+	//시야각, 종횡비, near, far : near보다 가까이 있거나 far보다 멀리있는 오브젝트 랜더링 하지 않음
 	const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000 );
 	
-	const boxGeo = new THREE.BoxGeometry();  //기하학 객체
-	const sphereGeo = new THREE.SphereGeometry(0.5, 30, 30);
-	const material = new THREE.MeshBasicMaterial( { color: "blue" } ); //표면속성
+	//기하학 객체
+	const boxGeo = new THREE.BoxGeometry(); 
+	const earthGeo = new THREE.SphereGeometry(1, 30, 30);
+	const moonGeo = new THREE.SphereGeometry(0.5, 30, 30);
 	
 	//Object3D를 상속받는 Mesh 객체 반환
 	//Object3D의 position속성(Vector Object) 확인
-	const cube = new THREE.Mesh(boxGeo, material);
-	const sphere = new THREE.Mesh(sphereGeo, material);
-	cube.position.z = -5; //z좌표
-	sphere.position.z = -5; //z좌표
-	sphere.position.x = 3; //x좌표
+	const cube = new THREE.Mesh(boxGeo, new THREE.MeshToonMaterial( { color: "yellow" } ));
+	const earth = new THREE.Mesh(earthGeo, new THREE.MeshPhongMaterial( { color: "blue" } ));
+	const moon = new THREE.Mesh(moonGeo, new THREE.MeshLambertMaterial( { color: "grey" } ));
 	
-	//scene에 3d 오브젝트 추가
+	cube.position.z = -5; //z좌표
+	earth.position.z = -5; //z좌표
+	earth.position.x = -3; //z좌표
+	moon.position.z = -5; //x좌표
+	moon.position.x = 3; //x좌표
+	
 	scene.add(cube);
-	scene.add(sphere);
+	scene.add(earth);
+	scene.add(moon);
 	
 	//글씨 출력
 	{
@@ -75,7 +82,6 @@ function main() {
 		doit();
 	}
 	
-	//빛 추가
 	const light = new THREE.DirectionalLight("white", 1); //reference 에서 target 확인
 	light.target = cube; //빛을 쏘는 지점을 cube로 설정
 	scene.add(light);

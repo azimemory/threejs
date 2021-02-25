@@ -1,0 +1,183 @@
+# Blender MTL File: 'apollo243.blend'
+# Material Count: 16
+
+newmtl Material
+Ns 96.078431
+Ka 1.000000 1.000000 1.000000
+Kd 0.800000 0.800000 0.800000
+Ks 1.000000 1.000000 1.000000
+Ke 1.600000 1.600000 1.600000
+Ni 1.000000
+d 1.000000
+illum 0
+map_Kd aplight.jpg
+map_Ka aplight.jpg
+map_Ke aplight.jpg
+
+newmtl None
+Ns 0
+Ka 0.000000 0.000000 0.000000
+Kd 0.8 0.8 0.8
+Ks 0.8 0.8 0.8
+d 1
+illum 2
+map_Kd apwhite.jpg
+
+newmtl None_Untitled
+Ns 0
+Ka 0.000000 0.000000 0.000000
+Kd 0.8 0.8 0.8
+Ks 0.8 0.8 0.8
+d 1
+illum 2
+map_Kd apmainup.jpg
+
+newmtl None_apgrey.jpg
+Ns 0
+Ka 0.000000 0.000000 0.000000
+Kd 0.8 0.8 0.8
+Ks 0.8 0.8 0.8
+d 1
+illum 2
+map_Kd apgrey.jpg
+
+newmtl apfrontlight
+Ns 96.078431
+Ka 1.000000 1.000000 1.000000
+Kd 0.800000 0.800000 0.800000
+Ks 1.000000 1.000000 1.000000
+Ke 1.600000 1.600000 1.600000
+Ni 1.000000
+d 1.000000
+illum 0
+map_Kd apfrontlight.jpg
+map_Ka apfrontlight.jpg
+map_Ke apfrontlight.jpg
+
+newmtl apmainmaterial
+Ns 96.078431
+Ka 1.000000 1.000000 1.000000
+Kd 0.640000 0.640000 0.640000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd apmainup.jpg
+
+newmtl apmainmaterial_NONE
+Ns 96.078431
+Ka 1.000000 1.000000 1.000000
+Kd 0.640000 0.640000 0.640000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 2
+
+newmtl apmainmaterial_apbrown.jpg
+Ns 96.078431
+Ka 1.000000 1.000000 1.000000
+Kd 0.640000 0.640000 0.640000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd apbrown.jpg
+
+newmtl apmainmaterial_apgrey.jpg
+Ns 96.078431
+Ka 1.000000 1.000000 1.000000
+Kd 0.640000 0.640000 0.640000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd apgrey.jpg
+
+newmtl apmainmaterial_apmaindown.jpg
+Ns 96.078431
+Ka 1.000000 1.000000 1.000000
+Kd 0.640000 0.640000 0.640000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd apmaindown.jpg
+
+newmtl apmainmaterial_apmainup1.jpg
+Ns 96.078431
+Ka 1.000000 1.000000 1.000000
+Kd 0.640000 0.640000 0.640000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd apmainup1.jpg
+
+newmtl apmainmaterial_apred.jpg
+Ns 96.078431
+Ka 1.000000 1.000000 1.000000
+Kd 0.640000 0.640000 0.640000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd apred.jpg
+
+newmtl apredmaterial
+Ns 96.078431
+Ka 1.000000 1.000000 1.000000
+Kd 1.000000 0.000000 0.000000
+Ks 0.500000 0.500000 0.500000
+Ke 2.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 0
+map_Kd apred.jpg
+map_Ka apred.jpg
+map_Ke apred.jpg
+
+newmtl apsidematerial
+Ns 96.078431
+Ka 1.000000 1.000000 1.000000
+Kd 0.800000 0.800000 0.800000
+Ks 0.500000 0.500000 0.500000
+Ke 1.600000 1.600000 1.600000
+Ni 1.000000
+d 1.000000
+illum 0
+map_Kd apside.jpg
+map_Ka apside.jpg
+map_Ke apside.jpg
+
+newmtl apwhitematerial
+Ns 96.078431
+Ka 1.000000 1.000000 1.000000
+Kd 1.000000 1.000000 1.000000
+Ks 0.500000 0.500000 0.500000
+Ke 2.000000 2.000000 2.000000
+Ni 1.000000
+d 1.000000
+illum 0
+map_Kd apwhite.jpg
+map_Ka apwhite.jpg
+map_Ke apwhite.jpg
+
+newmtl apyellowmaterial
+Ns 96.078431
+Ka 1.000000 1.000000 1.000000
+Kd 1.000000 1.000000 0.000000
+Ks 1.000000 1.000000 1.000000
+Ke 2.000000 2.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 0
+map_Kd apyellow.jpg
+map_Ka apyellow.jpg
+map_Ke apyellow.jpg

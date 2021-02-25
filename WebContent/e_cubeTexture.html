@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style type="text/css">
+	html, body {
+	  height: 100%;
+	  margin: 0;
+	}
+	
+</style>
+<script src="https://threejs.org/build/three.min.js"></script>
+<!-- OrbitControls.js allow the camera to orbit around a target 마우스와 카메라를 상호작용하게 합니다. -->
+<script src="https://threejs.org/examples/js/controls/OrbitControls.js"></script>
+<!-- OrbitControls.js allow the camera to orbit around a target 마우스와 카메라를 상호작용하게 합니다. -->
+<script src="https://threejs.org/examples/js/controls/OrbitControls.js"></script>
+</head>
+<body>
+<div id="c"></div>
+<script type="text/javascript">
+function main() {
+	let cube;
+	let earth;
+	let moon;
+	
+	//렌더링 할 요소와 화면 크기를 설정
+	const renderer = new THREE.WebGLRenderer();
+	renderer.setSize( window.innerWidth, window.innerHeight );
+	document.querySelector('#c').appendChild(renderer.domElement);	
+	
+	//공간
+	const scene = new THREE.Scene();
+	
+	//카메라
+	//시야각, 종횡비, near, far : near보다 가까이 있거나 far보다 멀리있는 오브젝트 랜더링 하지 않음
+	const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.03, 1000 );
+	const controls = new THREE.OrbitControls(camera, renderer.domElement);
+	controls.target.set(0, 0, 0);
+	controls.update();
+	
+	//기하학 객체
+	const boxGeo = new THREE.BoxGeometry(3,3,3); 
+	const earthGeo = new THREE.SphereGeometry(1, 30, 30);
+	const moonGeo = new THREE.SphereGeometry(0.5, 30, 30);
+	const neptunusGeo = new THREE.SphereGeometry(1, 30, 30);
+	//내부 원 둘래, 전체 원 둘래, 둥근 정도
+	const ringGeo = new THREE.RingGeometry(1.5, 2, 30);
+	const textureLoader = new THREE.TextureLoader();
+
+	//Object3D를 상속받는 Mesh 객체 반환
+	//Object3D의 position속성(Vector Object) 확인
+	cube = new THREE.Mesh(boxGeo, new THREE.MeshPhongMaterial( { color: "yellow" } ));
+	earth = new THREE.Mesh(earthGeo, new THREE.MeshPhongMaterial({map: textureLoader.load('resources/image/texture/earth.png')}));
+	moon = new THREE.Mesh(moonGeo, new THREE.MeshPhongMaterial({map: textureLoader.load('resources/image/texture/moon.png')}));
+	neptunus = new THREE.Mesh(neptunusGeo, new THREE.MeshPhongMaterial({map: textureLoader.load('resources/image/texture/neptunus.png')}));
+ 	ring = new THREE.Mesh(ringGeo, new THREE.MeshPhongMaterial( {map: textureLoader.load('resources/image/texture/ring.png')} ));
+ 	//하나의 씬으로 묶었기 때문에 혜왕성이 움직이면 링도 함께 움직인다.
+ 	//링의 위치는 혜왕성을 기준으로 결정된다.
+ 	neptunus.add(ring);
+ 	
+	cube.position.z = -5; //z좌표
+	earth.position.z = -5; //z좌표
+	earth.position.x = -5; //z좌표
+	moon.position.z = -2; //x좌표
+	moon.position.x = 0.05; //x좌표
+	neptunus.position.z = -5; //x좌표
+	neptunus.position.x = 5; //x좌표
+	ring.position.z = 0;
+	ring.position.x= 0;
+	ring.rotation.x= 5;
+	
+	earth.add(moon);
+	cube.add(earth);
+	cube.add(neptunus);
+	scene.add(cube);
+		
+	//글씨 출력
+	{
+		//json파일을 받아온 후 object를 그려야 함으로 promise를 만들어서  async를 사용한다.
+		const loader = new THREE.FontLoader();
+		  // promisify font loading
+		function loadFont(url) {
+		    return new Promise((resolve, reject) => {
+		      loader.load(url, resolve);
+		    });
+		}
+		
+		async function doit() {
+		    const font = await loadFont('resources/fonts/helvetiker_regular.typeface.json');  /* threejsfundamentals: url */
+		    const geometry = new THREE.TextGeometry('Space', {
+		      font: font,
+		      size: 0.5,
+		      height: 0.05
+		    });
+		    
+		    const text = new THREE.Mesh(geometry, new THREE.MeshToonMaterial( { color: "skyblue" } ));
+		    const parent = new THREE.Object3D();
+		    parent.add(text);
+		    parent.scale.x = 1;
+		    parent.position.z = -5;
+		    parent.position.x = -6;
+		    parent.position.y = 3;
+		 	scene.add(parent);
+		}
+		doit();
+	}
+	
+	 {
+	    const loader = new THREE.CubeTextureLoader();
+	    const texture = loader.load([
+	      'resources/image/cubemap/px.png',
+	      'resources/image/cubemap/nx.png',
+	      'resources/image/cubemap/py.png',
+	      'resources/image/cubemap/ny.png',
+	      'resources/image/cubemap/pz.png',
+	      'resources/image/cubemap/nz.png'
+	     
+	    ]);
+	    scene.background = texture;
+	}
+	
+	const light = new THREE.DirectionalLight("white", 1); //reference 에서 target 확인
+	light.target = cube; //빛을 쏘는 지점을 cube로 설정
+	scene.add(light);
+	
+	//애니메이션을 위해서 재귀함수를 통해 화면을 반복적으로 랜더링
+	//1초에 60번 반복
+	const animate = () =>{
+		requestAnimationFrame( animate ); //애니메이션 처리를 위한 window객체의 함수
+		earth.rotation.y += 0.03; //object x축 회전
+		cube.rotation.y += 0.01; //object x축 회전
+		renderer.render(scene, camera);
+	}
+	
+	camera.position.z= 20;
+	animate();
+}
+
+main();
+
+
+</script>
+</body>
+</html>

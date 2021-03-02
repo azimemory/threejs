@@ -3,160 +3,200 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<style type="text/css">
-	html, body {
-	  height: 100%;
-	  margin: 0;
-	}
-	
-</style>
+<link rel="stylesheet" href="resources/css/reset.css">
+<link rel="stylesheet" href="resources/css/all.css"> 
+<link rel="stylesheet" href="resources/css/web.css">
 <script src="https://threejs.org/build/three.min.js"></script>
-<!-- OrbitControls.js allow the camera to orbit around a target 마우스와 카메라를 상호작용하게 합니다. -->
-<script src="https://threejs.org/examples/js/controls/OrbitControls.js"></script>
+<!-- 마우스와 카메라를 상호작용하게 한다. -->
+<script src="resources/js/OrbitControls.js"></script>
 <script src="resources/js/OBJLoader.js"></script>
 <script src="resources/js/MTLLoader.js"></script>
+<script src="resources/js/myThreeJS.js"></script>
 </head>
 <body>
-<div id="c"></div>
+	<header class="header-section">
+		<a class="top-logo-text">PCLASS</a>
+		<form class="frm_top-search">
+			<input type="text" class="input_top-search" placeholder="검색어를 입력하세요.">
+			<button class="btn_top-search"><i class="fas fa-search"></i></button>
+		</form>
+		<a class="top_user top_join">회원가입</a>
+		<a class="top_user">Login</a>
+	</header>
+	<aside class="wrap_aside">
+		<p>Menu</p>
+		<ul class="snb_menu">
+			<li>
+				<i class="fas fa-search"></i>
+				<span>도서검색</span>
+			</li>
+			<li><i class="fas fa-cart-plus"></i>
+				<span>장바구니</span>
+			</li>
+			<li><i class="fas fa-chalkboard"></i>
+				<span>공지사항</span>
+			</li>
+			<li>
+				<i class="fas fa-user-friends"></i>
+				<span>about us</span>
+			</li>
+		</ul>
+	</aside>
+	<section class="content">
+		<div class="middle">
+			
+			
+			
+		</div>	
+		<div class="wrap_book">
+			<div>
+				<p class="cate-book">최근 인기 도서</p>
+				<div class="line-book">
+					<div>
+						<img src="resources/image/Nudge.jpg">
+						<p class="tit_book">Nudge</p>
+					</div>
+					<div>
+						<img src="resources/image/Nudge.jpg">
+						<p class="tit_book">Nudge</p>
+					</div>
+					<div>
+						<img src="resources/image/Nudge.jpg">
+						<p class="tit_book">Nudge</p>
+					</div>
+					<div>
+						<img src="resources/image/Nudge.jpg">
+						<p class="tit_book">Nudge</p>
+					</div>
+				</div>
+			</div>
+			<div>
+				<p class="cate-book">스테디셀러</p>
+				<div class="line-book">
+					<div>
+						<img src="resources/image/Nudge.jpg">
+						<p class="tit_book">Nudge</p>
+					</div>
+					<div>
+						<img src="resources/image/Nudge.jpg">
+						<p class="tit_book">Nudge</p>
+					</div>
+					<div>
+						<img src="resources/image/Nudge.jpg">
+						<p class="tit_book">Nudge</p>
+					</div>
+					<div>
+						<img src="resources/image/Nudge.jpg">
+						<p class="tit_book">Nudge</p>
+					</div>
+				</div>
+			</div>
+			<div>
+				<p class="cate-book">새로 들어온 책</p>
+				<div class="line-book">
+					<div>
+						<img src="resources/image/Nudge.jpg">
+						<p class="tit_book">Nudge</p>
+					</div>
+					<div>
+						<img src="resources/image/Nudge.jpg">
+						<p class="tit_book">Nudge</p>
+					</div>
+					<div>
+						<img src="resources/image/Nudge.jpg">
+						<p class="tit_book">Nudge</p>
+					</div>
+					<div>
+						<img src="resources/image/Nudge.jpg">
+						<p class="tit_book">Nudge</p>
+					</div>
+				</div>
+			</div>
+			<div>
+				<p class="cate-book">최근 대출 도서</p>
+				<div class="line-book">
+					<div>
+						<img src="resources/image/Nudge.jpg">
+						<p class="tit_book">Nudge</p>
+					</div>
+					<div>
+						<img src="resources/image/Nudge.jpg">
+						<p class="tit_book">Nudge</p>
+					</div>
+					<div>
+						<img src="resources/image/Nudge.jpg">
+						<p class="tit_book">Nudge</p>
+					</div>
+					<div>
+						<img src="resources/image/Nudge.jpg">
+						<p class="tit_book">Nudge</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<footer class="bottom">
+		footer
+	</footer>
+</body>
 <script type="text/javascript">
-function main() {
-	let cube;
-	let earth;
-	let moon;
-	let point;
-	//렌더링 할 요소와 화면 크기를 설정
-	const renderer = new THREE.WebGLRenderer();
-	renderer.setSize( window.innerWidth, window.innerHeight );
-	document.querySelector('#c').appendChild(renderer.domElement);	
-	
-	//공간
-	const scene = new THREE.Scene();
-	
-	//카메라
-	//시야각, 종횡비, near, far : near보다 가까이 있거나 far보다 멀리있는 오브젝트 랜더링 하지 않음
-	const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.03, 1000 );
-	const controls = new THREE.OrbitControls(camera, renderer.domElement);
-	controls.target.set(0, 0, 0);
-	controls.update();
-	
-	//기하학 객체
-	const boxGeo = new THREE.BoxGeometry(3,3,3); 
-	const earthGeo = new THREE.SphereGeometry(1, 30, 30);
-	const moonGeo = new THREE.SphereGeometry(0.5, 30, 30);
-	const neptunusGeo = new THREE.SphereGeometry(1, 30, 30);
-	//내부 원 둘래, 전체 원 둘래, 둥근 정도
-	const ringGeo = new THREE.RingGeometry(1.5, 2, 30);
-	const textureLoader = new THREE.TextureLoader();
 
-	//Object3D를 상속받는 Mesh 객체 반환
-	//Object3D의 position속성(Vector Object) 확인
-	cube = new THREE.Mesh(boxGeo, new THREE.MeshPhongMaterial( { color: "yellow" } ));
-	earth = new THREE.Mesh(earthGeo, new THREE.MeshPhongMaterial({map: textureLoader.load('resources/image/texture/earth.png')}));
-	moon = new THREE.Mesh(moonGeo, new THREE.MeshPhongMaterial({map: textureLoader.load('resources/image/texture/moon.png')}));
-	neptunus = new THREE.Mesh(neptunusGeo, new THREE.MeshPhongMaterial({map: textureLoader.load('resources/image/texture/neptunus.png')}));
- 	ring = new THREE.Mesh(ringGeo, new THREE.MeshPhongMaterial( {map: textureLoader.load('resources/image/texture/ring.png')} ));
- 	//하나의 씬으로 묶었기 때문에 혜왕성이 움직이면 링도 함께 움직인다.
- 	//링의 위치는 혜왕성을 기준으로 결정된다.
- 	neptunus.add(ring);
- 	
-	cube.position.z = -5; //z좌표
+async function main() {
 	
-	earth.position.z = -5; //z좌표
-	earth.position.x = -5; //z좌표
+	let cube, earth, moon, point;	
+	let mtj = new MyThreeJS();
+	//무대 생성
+	mtj.createStage(document.querySelector('.middle'));	
+	mtj.camera.position.set(0,2,8);
+	//배경텍스처 작성
+	mtj.createBackgroundWithTexture([
+	      'resources/texture/background/px.png',
+	      'resources/texture/background/nx.png',
+	      'resources/texture/background/py.png',
+	      'resources/texture/background/ny.png',
+	      'resources/texture/background/pz.png',
+	      'resources/texture/background/nz.png'	     
+	]);
 	
-	moon.position.z = -2; //x좌표
-	moon.position.x = 0.1; //x좌표
-	
-	neptunus.position.z = -5; //x좌표
-	neptunus.position.x = 5; //x좌표
-	
-	ring.position.z = 0;
-	ring.position.x= 0;
+	//primitive 객체 생성
+	const textureLoader = new THREE.TextureLoader();
+	cube = mtj.createObject(new THREE.BoxGeometry(3,3,3),{ color: "yellow" });
+	earth = mtj.createObject(new THREE.SphereGeometry(1, 30, 30),{map: textureLoader.load('resources/texture/earth.png')});
+	moon = mtj.createObject(new THREE.SphereGeometry(0.5, 30, 30),{map: textureLoader.load('resources/texture/moon.png')});
+	neptunus = mtj.createObject(new THREE.SphereGeometry(1, 30, 30),{map: textureLoader.load('resources/texture/neptunus.png')});
+	ring = mtj.createObject(new THREE.RingGeometry(1.5, 2, 30),{map: textureLoader.load('resources/texture/ring.png')});
+	 	
+ 	//object 위치 좌표
+	cube.position.set(0,0,-5); //z좌표	
+	earth.position.set(-5,0,-5);
+	moon.position.set( 0.1,0,-2);	
+	neptunus.position.set(5,0,-5);		
 	ring.rotation.x= 5;
 	
+	//씬그래프 작성	
+ 	neptunus.add(ring); 
 	earth.add(moon);
 	cube.add(earth);
 	cube.add(neptunus);
-	scene.add(cube);
+	mtj.scene.add(cube);
 		
-	//글씨 출력
-	{
-		//json파일을 받아온 후 object를 그려야 함으로 promise를 만들어서  async를 사용한다.
-		const loader = new THREE.FontLoader();
-		  // promisify font loading
-		function loadFont(url) {
-		    return new Promise((resolve, reject) => {
-		      loader.load(url, resolve);
-		    });
-		}
-		
-		async function doit() {
-		    const font = await loadFont('resources/fonts/helvetiker_regular.typeface.json');  /* threejsfundamentals: url */
-		    const geometry = new THREE.TextGeometry('Space', {
-		      font: font,
-		      size: 0.5,
-		      height: 0.05
-		    });
-		    
-		    const text = new THREE.Mesh(geometry, new THREE.MeshToonMaterial( { color: "skyblue" } ));
-		    const parent = new THREE.Object3D();
-		    parent.add(text);
-		    parent.scale.x = 1;
-		    parent.position.z = -5;
-		    parent.position.x = -6;
-		    parent.position.y = 3;
-		 	scene.add(parent);
-		}
-		doit();
-	}
+	let text = await mtj.createText('resources/fonts/helvetiker_regular.typeface.json','PCLASS','yellow',1);
+	text.position.set(-2.5,5,0);
+	let ufo = await mtj.createObjObject('resources/obj/apollo/apollo.obj','resources/obj/apollo/apollo.mtl');
+	//씬그래프작성을 위한 빈 객체 생성
+	point = new THREE.Object3D();
+	point.add(ufo);
+	ufo.position.set(10,2,0);
+	mtj.scene.add(point);
 	
-	{
-	    const loader = new THREE.CubeTextureLoader();
-	    const texture = loader.load([
-	      'resources/image/spacecube/px.jpg',
-	      'resources/image/spacecube/nx.jpg',
-	      'resources/image/spacecube/py.jpg',
-	      'resources/image/spacecube/ny.jpg',
-	      'resources/image/spacecube/pz.jpg',
-	      'resources/image/spacecube/nz.jpg'
-	     
-	    ]);
-	    scene.background = texture;
-	}
-	
-	
-	{			
-		// instantiate a loader
-		const objLoader = new THREE.OBJLoader();
-		
-		const mtlLoader = new THREE.MTLLoader();
-		  mtlLoader.load('resources/obj/Apollo/apollo.mtl', (mtl) => {
-		    mtl.preload();
-		    objLoader.setMaterials(mtl);
-		    objLoader.load('resources/obj/Apollo/apollo.obj', (root) => {
-		      root.position.x = 17;	
-		      root.rotation.z = -0.5;	
-		      root.rotation.y = 2.5;	
-		      point = new THREE.Object3D(); 
-		      point.add(root);
-		      scene.add(point);
-		    });
-		});			
-	}
-	
-
-	
-	const light = new THREE.DirectionalLight("white", 2); //reference 에서 target 확인
-	light.target = cube; //빛을 쏘는 지점을 cube로 설정
-	scene.add(light);
-	camera.position.z= 10;
-	//애니메이션을 위해서 재귀함수를 통해 화면을 반복적으로 랜더링 , 1초에 60번 반복
 	const animate = () =>{
-		requestAnimationFrame( animate ); //애니메이션 처리를 위한 window객체의 함수
+		//애니메이션 처리를 위한 window객체의 함수
+		//애니메이션을 위해서 재귀함수를 통해 화면을 반복적으로 랜더링 , 1초에 60번 반복
+		requestAnimationFrame( animate ); 
 		earth.rotation.y += 0.03; //object y축 회전
 		cube.rotation.y += 0.01; //object y축 회전
-		point.rotation.y -= 0.05;
-		renderer.render(scene, camera);
+		point.rotation.y += 0.05;
+		mtj.renderer.render(mtj.scene, mtj.camera);
 	}
 	
 	animate();
@@ -165,6 +205,39 @@ function main() {
 main();
 
 
+
+
+
+
 </script>
-</body>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 </html>

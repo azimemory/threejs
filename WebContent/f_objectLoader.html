@@ -182,7 +182,7 @@ async function main() {
 		
 	let text = await mtj.createText('resources/fonts/helvetiker_regular.typeface.json','PCLASS','yellow',1);
 	text.position.set(-2.5,5,0);
-	let ufo = await mtj.createObjObject('resources/obj/apollo/apollo.obj','resources/obj/apollo/apollo.mtl');
+	let ufo = await mtj.createObjObject('resources/obj/Apollo/apollo.obj','resources/obj/Apollo/apollo.mtl');
 	//씬그래프작성을 위한 빈 객체 생성
 	point = new THREE.Object3D();
 	point.add(ufo);

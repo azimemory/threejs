@@ -11,6 +11,11 @@
 		background-size: cover;
 	}
 	
+	.middle>*{
+		width:100vw !important;
+		height:35vw !important;
+	}
+	
 	.wrap_aside{
 		display:none;
 	}
@@ -44,6 +49,11 @@
 		background-image:url(../image/main_banner_02.jpg);
 		background-size: cover;
 	}	
+	
+	.middle>*{
+		width:100vw !important;
+		height:35vw !important;
+	}
 	
 	.wrap_aside{
 		position: fixed;

@@ -1,5 +1,10 @@
 @charset "UTF-8";
 
+.middle canvas{
+	width:100vw !important;
+	height:35vw !important;
+}
+
 @media(min-aspect-ratio:5/4){
 	.wrap_snb{
 		position:fixed;
@@ -14,6 +19,7 @@
 		flex-direction:column;
 		justify-content:space-around;
 		height:35vw;
+		background-image: url('../image/main_banner_02.jpg');
 		background-size: cover;
 	}
 	

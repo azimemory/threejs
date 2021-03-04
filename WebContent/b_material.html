@@ -3,32 +3,40 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" href="resources/css/reset.css">
-<link rel="stylesheet" href="resources/css/all.css"> 
-<link rel="stylesheet" href="resources/css/web.css">
+<link href="resources/css/all.css" rel="stylesheet">
+<link href="resources/css/reset.css" rel="stylesheet">
+<link href="resources/css/lec_web.css" rel="stylesheet">
 <script src="https://threejs.org/build/three.min.js"></script>
 </head>
 <body>
 	<header class="header-section">
-		<a class="top-logo-text">PCLASS</a>
+		<div class="wrap_top-logo">
+			<a class="top-logo-text">PCLASS</a>
+		</div>
+		
 		<form class="frm_top-search">
-			<input type="text" class="input_top-search" placeholder="검색어를 입력하세요.">
-			<button class="btn_top-search"><i class="fas fa-search"></i></button>
+			<input type="search" class="input_top-search" placeholder="검색어를 입력하세요.">
+			<button><i class="fas fa-search"></i></button>
 		</form>
-		<a class="top_user top_join">회원가입</a>
-		<a class="top_user">Login</a>
+		
+		<div class="wrap_user">
+			<a class="top_user top_join">회원가입</a>
+			<a class="top_user">Login</a>
+		</div>
 	</header>
-	<aside class="wrap_aside">
+	<aside class="wrap_snb">
 		<p>Menu</p>
 		<ul class="snb_menu">
 			<li>
 				<i class="fas fa-search"></i>
 				<span>도서검색</span>
 			</li>
-			<li><i class="fas fa-cart-plus"></i>
+			<li>
+				<i class="fas fa-cart-plus"></i>
 				<span>장바구니</span>
 			</li>
-			<li><i class="fas fa-chalkboard"></i>
+			<li>
+				<i class="far fa-clipboard"></i>
 				<span>공지사항</span>
 			</li>
 			<li>
@@ -37,16 +45,16 @@
 			</li>
 		</ul>
 	</aside>
-	<section class="content">
-		<div class="middle">
+	<section class="contents">
+		<article class="middle">
 			
 			
 			
-		</div>	
-		<div class="wrap_book">
-			<div>
-				<p class="cate-book">최근 인기 도서</p>
-				<div class="line-book">
+		</article>
+		<article class="wrap_book">
+			<div class='wrap_book-line'>
+				<p class='cate-book'>최근 인기 도서</p>
+				<div class='book-line'>
 					<div>
 						<img src="resources/image/Nudge.jpg">
 						<p class="tit_book">Nudge</p>
@@ -65,9 +73,9 @@
 					</div>
 				</div>
 			</div>
-			<div>
-				<p class="cate-book">스테디셀러</p>
-				<div class="line-book">
+			<div class='wrap_book-line'>
+				<p class='cate-book'>스테디셀러</p>
+				<div class='book-line'>
 					<div>
 						<img src="resources/image/Nudge.jpg">
 						<p class="tit_book">Nudge</p>
@@ -86,9 +94,9 @@
 					</div>
 				</div>
 			</div>
-			<div>
-				<p class="cate-book">새로 들어온 책</p>
-				<div class="line-book">
+			<div class='wrap_book-line'>
+				<p class='cate-book'>새로 들어온 책</p>
+				<div class='book-line'>
 					<div>
 						<img src="resources/image/Nudge.jpg">
 						<p class="tit_book">Nudge</p>
@@ -107,9 +115,9 @@
 					</div>
 				</div>
 			</div>
-			<div>
-				<p class="cate-book">최근 대출 도서</p>
-				<div class="line-book">
+			<div class='wrap_book-line'>
+				<p class='cate-book'>최근 대출 도서</p>
+				<div class='book-line'>
 					<div>
 						<img src="resources/image/Nudge.jpg">
 						<p class="tit_book">Nudge</p>
@@ -128,72 +136,78 @@
 					</div>
 				</div>
 			</div>
-		</div>
+		</article>
 	</section>
 	<footer class="bottom">
-		footer
+		bottom
 	</footer>
-</body>
-<script type="text/javascript">
-//3d오브젝트를 렌더링할 HTML Element요소
-let middle = document.querySelector('.middle');
-//scene 객체 생성
-const scene = new THREE.Scene();
-scene.background = new THREE.Color("skyblue");
-//camera 세팅 
-//시야각, 종횡비, near, far 
-//near : 해당 값보다 가까이 있는 오브젝트는 랜더링하지 않음 / far : 해당값보다 멀리 있는 오브젝트는 렌더링하지 않음
-const camera = new THREE.PerspectiveCamera( 75, middle.clientWidth / middle.clientHeight, 0.1, 1000 );
-const renderer = new THREE.WebGLRenderer();
-renderer.setSize( middle.clientWidth, middle.clientHeight );
-middle.appendChild( renderer.domElement );
+	<script type="text/javascript">
+	//씬을 랜더링 할 요소
+	const middle = document.querySelector('.middle');
+	
+	const scene = new THREE.Scene();
+	const camera = new THREE.PerspectiveCamera( 75, middle.clientWidth / middle.clientHeight, 0.1, 1000 );
+	const renderer = new THREE.WebGLRenderer();
+	renderer.setSize( middle.clientWidth, middle.clientHeight );
+	
+	//광원배치
+	{
+		  const color = 0xFFFFFF;
+		  const intensity = 1;
+		  const light = new THREE.DirectionalLight(color, intensity);
+		  light.position.set(-1, 2, 4);
+		  scene.add(light);
+	}
+	
+	
+	//renderer.domElement : 씬을 보여주는 canvas Element
+	middle.appendChild( renderer.domElement );
+	scene.background = new THREE.Color('skyblue');
+	
+	const boxGeo = new THREE.BoxGeometry();
+	const material = new THREE.MeshPhongMaterial( { color: 0x00ff00 } );
+	const cube = new THREE.Mesh( boxGeo, material );
+	
+	const sphereGeo = new THREE.SphereGeometry(0.5,30,30);
+	const sphere = new THREE.Mesh(sphereGeo,material);
+	sphere.position.set(5,0,0);
+	
+	const moonGeo = new THREE.SphereGeometry(0.2,30,30);
+	const moon = new THREE.Mesh(moonGeo,material);
+	moon.position.set(7,0,0);
+	
+	scene.add( sphere );
+	scene.add( cube );
+	scene.add( moon );
 
-const boxGeo = new THREE.BoxGeometry(); //기하학 도형 오브젝트 생성
-const material = new THREE.MeshPhongMaterial( { color: "yellow" } ); //오브젝트에 적용할 재질
-const cube = new THREE.Mesh( boxGeo, material ); //도형과 재질을 합쳐서 새로운 object 생성
-cube.position.set(5,0,0);
-scene.add( cube ); //무대에 추가
-camera.position.z = 5;
-
-const sphereGeo = new THREE.SphereGeometry( 1, 32, 32 );
-const sphere = new THREE.Mesh( sphereGeo, material );
-sphere.position.set(-5,0,0);
-scene.add(sphere);
-
-//빛 추가
-{
-  const color = 'white';
-  const intensity = 1;
-  const light = new THREE.DirectionalLight(color, intensity);
-  light.position.set(-1, 2, 4);
-  scene.add(light);
-}
-
-const fontLoader = new THREE.FontLoader();
-fontLoader.load( 'resources/fonts/helvetiker_regular.typeface.json', function ( font ) {
-	const fontGeo = new THREE.TextGeometry( 'Pclass', {
-		font: font,
-		size: 1,
-		height: 0.3,
-		curveSegments: 12		
+	camera.position.z = 5;
+	
+	const fontLoader = new THREE.FontLoader();
+	fontLoader.load( 'resources/fonts/helvetiker_regular.typeface.json', function ( font ) {
+		const geometry = new THREE.TextGeometry( 'Pclass', {
+			font: font,
+			size: 1,
+			height: 0.3,
+			curveSegments: 12			
+		});
+		
+		const material = new THREE.MeshPhongMaterial( { color: 'pink' } );
+		const text = new THREE.Mesh(geometry,material);
+		text.position.set(-2.5,2,0);
+		scene.add(text);
 	});
 	
-	text = new THREE.Mesh(fontGeo,material);
-	text.position.set(-2.5,0,0);
-	scene.add(text);
+	function animate() {
+		requestAnimationFrame( animate );
+		cube.rotation.x += 0.01;
+		cube.rotation.y += 0.01;
+		renderer.render( scene, camera );
+	}
 	animate();
-});
-
-//화면 랜더링
-function animate() {
-	requestAnimationFrame( animate );
-	cube.rotation.x += 0.01;
-	cube.rotation.y += 0.01;
-	sphere.rotation.x += 0.03;
-	sphere.rotation.y += 0.03;
-	text.rotation.x += 0.02;
-	renderer.render( scene, camera );	
-}
+	
+	
+	
+	
 
 
 
@@ -201,18 +215,8 @@ function animate() {
 
 
 
-</script>
-
-
-
-
-
-
-
-
-
-
-
+	</script>	
+</body>
 
 
 

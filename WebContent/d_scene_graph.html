@@ -3,247 +3,254 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link href="resources/css/all.css" rel="stylesheet">
-<link href="resources/css/reset.css" rel="stylesheet">
-<link href="resources/css/lec_web.css" rel="stylesheet">
-<script src="https://threejs.org/build/three.min.js"></script>
+<link href="resources/css/reset.css" type="text/css" rel="stylesheet">
+<link href="resources/css/all.css" type="text/css" rel="stylesheet">
+<link href="resources/css/lec_web.css" type="text/css" rel="stylesheet">
+<link href="resources/css/lec_mob.css" type="text/css" rel="stylesheet" media="screen and (max-width:600px)">
+<script type="text/javascript" src="/resources/js/three.js"></script>
+
 </head>
 <body>
-	<header class="header-section">
-		<div class="wrap_top-logo">
-			<a class="top-logo-text">PCLASS</a>
-		</div>
-		
-		<form class="frm_top-search">
-			<input type="search" class="input_top-search" placeholder="검색어를 입력하세요.">
-			<button><i class="fas fa-search"></i></button>
-		</form>
-		
-		<div class="wrap_user">
-			<a class="top_user top_join">회원가입</a>
-			<a class="top_user">Login</a>
-		</div>
-	</header>
-	<aside class="wrap_snb">
-		<p>Menu</p>
-		<ul class="snb_menu">
-			<li>
-				<i class="fas fa-search"></i>
-				<span>도서검색</span>
-			</li>
-			<li>
-				<i class="fas fa-cart-plus"></i>
-				<span>장바구니</span>
-			</li>
-			<li>
-				<i class="far fa-clipboard"></i>
-				<span>공지사항</span>
-			</li>
-			<li>
-				<i class="fas fa-user-friends"></i>
-				<span>about us</span>
-			</li>
-		</ul>
-	</aside>
-	<section class="contents">
-		<article class="middle">
-			
-			
-			
-		</article>
-		<article class="wrap_book">
-			<div class='wrap_book-line'>
-				<p class='cate-book'>최근 인기 도서</p>
-				<div class='book-line'>
-					<div>
-						<img src="resources/image/Nudge.jpg">
-						<p class="tit_book">Nudge</p>
-					</div>
-					<div>
-						<img src="resources/image/Nudge.jpg">
-						<p class="tit_book">Nudge</p>
-					</div>
-					<div>
-						<img src="resources/image/Nudge.jpg">
-						<p class="tit_book">Nudge</p>
-					</div>
-					<div>
-						<img src="resources/image/Nudge.jpg">
-						<p class="tit_book">Nudge</p>
-					</div>
-				</div>
-			</div>
-			<div class='wrap_book-line'>
-				<p class='cate-book'>스테디셀러</p>
-				<div class='book-line'>
-					<div>
-						<img src="resources/image/Nudge.jpg">
-						<p class="tit_book">Nudge</p>
-					</div>
-					<div>
-						<img src="resources/image/Nudge.jpg">
-						<p class="tit_book">Nudge</p>
-					</div>
-					<div>
-						<img src="resources/image/Nudge.jpg">
-						<p class="tit_book">Nudge</p>
-					</div>
-					<div>
-						<img src="resources/image/Nudge.jpg">
-						<p class="tit_book">Nudge</p>
-					</div>
-				</div>
-			</div>
-			<div class='wrap_book-line'>
-				<p class='cate-book'>새로 들어온 책</p>
-				<div class='book-line'>
-					<div>
-						<img src="resources/image/Nudge.jpg">
-						<p class="tit_book">Nudge</p>
-					</div>
-					<div>
-						<img src="resources/image/Nudge.jpg">
-						<p class="tit_book">Nudge</p>
-					</div>
-					<div>
-						<img src="resources/image/Nudge.jpg">
-						<p class="tit_book">Nudge</p>
-					</div>
-					<div>
-						<img src="resources/image/Nudge.jpg">
-						<p class="tit_book">Nudge</p>
-					</div>
-				</div>
-			</div>
-			<div class='wrap_book-line'>
-				<p class='cate-book'>최근 대출 도서</p>
-				<div class='book-line'>
-					<div>
-						<img src="resources/image/Nudge.jpg">
-						<p class="tit_book">Nudge</p>
-					</div>
-					<div>
-						<img src="resources/image/Nudge.jpg">
-						<p class="tit_book">Nudge</p>
-					</div>
-					<div>
-						<img src="resources/image/Nudge.jpg">
-						<p class="tit_book">Nudge</p>
-					</div>
-					<div>
-						<img src="resources/image/Nudge.jpg">
-						<p class="tit_book">Nudge</p>
-					</div>
-				</div>
-			</div>
-		</article>
-	</section>
-	<footer class="bottom">
-		bottom
-	</footer>
-	<script type="text/javascript">
-	//씬을 랜더링 할 요소
-	const middle = document.querySelector('.middle');
-	
-	const scene = new THREE.Scene();
-	const camera = new THREE.PerspectiveCamera( 75, middle.clientWidth / middle.clientHeight, 0.1, 1000 );
-	const renderer = new THREE.WebGLRenderer();
-	renderer.setSize( middle.clientWidth, middle.clientHeight );
-	
-	//광원배치
-	{
-		  const color = 0xFFFFFF;
-		  const intensity = 1;
-		  const light = new THREE.DirectionalLight(color, intensity);
-		  light.position.set(-1, 2, 4);
-		  scene.add(light);
-	}
-	
-	
-	//renderer.domElement : 씬을 보여주는 canvas Element
-	middle.appendChild( renderer.domElement );
-	scene.background = new THREE.Color('black');
-	
-	const textureLoader = new THREE.TextureLoader();
-	
-	const boxGeo = new THREE.BoxGeometry();
-	const boxMaterial = new THREE.MeshPhongMaterial( { color: 0x00ff00 } );
-	const cube = new THREE.Mesh( boxGeo, boxMaterial );
-	
-	const sphereGeo = new THREE.SphereGeometry(0.5,30,30);
-	const sphereMaterial = new THREE.MeshPhongMaterial( { map: textureLoader.load('resources/texture/earth.png') } );
-	const sphere = new THREE.Mesh(sphereGeo,sphereMaterial);
-	sphere.position.set(5,0,0);
-	
-	const neptunusGeo = new THREE.SphereGeometry(1.2,30,30);
-	const neptunusMaterial = new THREE.MeshPhongMaterial( { map: textureLoader.load('resources/texture/neptunus.png') } );
-	const neptunus = new THREE.Mesh(neptunusGeo,neptunusMaterial);
-	neptunus.position.set(-5,0,0);
-	
-	const moonGeo = new THREE.SphereGeometry(0.2,30,30);
-	const moonMaterial = new THREE.MeshPhongMaterial( { map: textureLoader.load('resources/texture/moon.png') } );
-	const moon = new THREE.Mesh(moonGeo,moonMaterial);
-	moon.position.set(2,0,0);
-	
-	const ringGeo = new THREE.RingGeometry(1.5, 2, 30);
-	const ringMaterial = new THREE.MeshPhongMaterial(
-					{	map: textureLoader.load('resources/texture/ring.png'), 
-						side:THREE.DoubleSide});
-	
-	const ring = new THREE.Mesh(ringGeo,ringMaterial);
-	ring.rotation.x = 5;
-	
-	sphere.add(moon);
-	neptunus.add(ring);
-	cube.add(sphere);
-	cube.add(neptunus);
-	scene.add( cube );
-	
-	camera.position.z = 10;
-	
-	const fontLoader = new THREE.FontLoader();
-	fontLoader.load( 'resources/fonts/helvetiker_regular.typeface.json', function ( font ) {
-		const geometry = new THREE.TextGeometry( 'Pclass', {
-			font: font,
-			size: 1,
-			height: 0.3,
-			curveSegments: 12			
-		});
-		
-		const material = new THREE.MeshPhongMaterial( { color: 'pink' } );
-		const text = new THREE.Mesh(geometry,material);
-		text.position.set(-2.5,2,0);
-		scene.add(text);
-	});
-	
-	function animate() {
-		requestAnimationFrame( animate );
-		cube.rotation.y += 0.01;
-		sphere.rotation.y += 0.03;
-		renderer.render( scene, camera );
-	}
-	
-	animate();
+   <div class="header">
+      <div class="wrap_logo">
+         <a class="logo">PCLASS</a>
+      </div>
+      <form class="frm_top-search">
+         <input class="inp_search" type="text" placeholder="검색어를 입력하세요">
+         <i class="fas fa-search"></i>
+      </form>
+      <div class="wrap_user">
+         <a>로그인</a>
+         <a>회원가입</a>
+         <i class="fas fa-bars"></i>
+      </div>
+   </div>
+   <div class="snb">
+      <p>Menu</p>
+      <ul>
+         <li>
+            <i class="fas fa-search"></i>
+            <p>도서검색</p>
+         </li>
+         <li>
+            <i class="fas fa-cart-plus"></i>
+            <p>장바구니</p>
+         </li>
+         <li>
+            <i class="fas fa-clipboard-list"></i>
+            <p>공지사항</p>
+         </li>
+         <li>
+            <i class="fas fa-user-friends"></i>
+            <p>About Us</p>
+         </li>
+      </ul>
+   </div>
+   
+   <div class="contents">
+      <div class="main">
+         
+      </div>
+      <div class="wrap_book">
+         <p>최근 인기 도서</p>
+         <div class="wrap_book-line">
+            <div>
+               <img src="resources/image/Nudge.jpg">
+               <p>Nudge</p>
+            </div>
+            <div>
+               <img src="resources/image/Nudge.jpg">
+               <p>Nudge</p>
+            </div>
+            <div>
+               <img src="resources/image/Nudge.jpg">
+               <p>Nudge</p>
+            </div>
+            <div>
+               <img src="resources/image/Nudge.jpg">
+               <p>Nudge</p>
+            </div>
+         </div>
+      </div>
+      <div class="wrap_book">
+         <p>스테디셀러</p>
+         <div class="wrap_book-line">
+            <div>
+               <img src="resources/image/Nudge.jpg">
+               <p>Nudge</p>
+            </div>
+            <div>
+               <img src="resources/image/Nudge.jpg">
+               <p>Nudge</p>
+            </div>
+            <div>
+               <img src="resources/image/Nudge.jpg">
+               <p>Nudge</p>
+            </div>
+            <div>
+               <img src="resources/image/Nudge.jpg">
+               <p>Nudge</p>
+            </div>
+         </div>
+      </div>
+      <div class="wrap_book">
+         <p>새로 들어온 책</p>
+         <div class="wrap_book-line">
+            <div>
+               <img src="resources/image/Nudge.jpg">
+               <p>Nudge</p>
+            </div>
+            <div>
+               <img src="resources/image/Nudge.jpg">
+               <p>Nudge</p>
+            </div>
+            <div>
+               <img src="resources/image/Nudge.jpg">
+               <p>Nudge</p>
+            </div>
+            <div>
+               <img src="resources/image/Nudge.jpg">
+               <p>Nudge</p>
+            </div>
+         </div>
+      </div>
+      <div class="wrap_book">
+         <p>최근 대출 도서</p>
+         <div class="wrap_book-line">
+            <div>
+               <img src="resources/image/Nudge.jpg">
+               <p>Nudge</p>
+            </div>
+            <div>
+               <img src="resources/image/Nudge.jpg">
+               <p>Nudge</p>
+            </div>
+            <div>
+               <img src="resources/image/Nudge.jpg">
+               <p>Nudge</p>
+            </div>
+            <div>
+               <img src="resources/image/Nudge.jpg">
+               <p>Nudge</p>
+            </div>
+         </div>
+      </div>
+   </div>
+   <div class="footer"></div>
+   
 
-	</script>	
+
+<script type="text/javascript">
+
+let mainDiv = document.querySelector('.main');
+const scene = new THREE.Scene();
+const camera = new THREE.PerspectiveCamera( 90, mainDiv.clientWidth / mainDiv.clientHeight, 0.1, 1000 );
+
+const renderer = new THREE.WebGLRenderer();
+renderer.setSize( mainDiv.clientWidth, mainDiv.clientHeight);
+document.querySelector('.main').appendChild( renderer.domElement );
+
+const color = 0xFFFFFF;
+let light = new THREE.DirectionalLight(color,1);
+light.position.set(-1, 2, 4);
+scene.add( light );
+
+const cubeGeo = new THREE.BoxGeometry();
+const material = new THREE.MeshPhongMaterial( { color: 0x00ff00 } );
+const cube = new THREE.Mesh( cubeGeo, material );
+scene.add( cube );
+
+const earthGeo = new THREE.SphereGeometry(0.6,30,30);
+const textureLoader = new THREE.TextureLoader();
+const earthTexture = textureLoader.load('resources/texture/earth.png');
+const earthMaterial = new THREE.MeshPhongMaterial({
+    map: earthTexture,
+ });
+
+const earth = new THREE.Mesh(earthGeo, earthMaterial);
+earth.position.x= -3;
+cube.add( earth );
+
+const moonGeo = new THREE.SphereGeometry(0.3,30,30);
+const moonTexture = textureLoader.load('resources/texture/moon.png');
+const moonMaterial = new THREE.MeshPhongMaterial({
+    map: moonTexture,
+ });
+
+const moon = new THREE.Mesh( moonGeo, moonMaterial );
+moon.position.x= -2;
+earth.add( moon );
+
+const neptuneGeo = new THREE.SphereGeometry(1.2,30,30);
+const neptuneTexture = textureLoader.load('resources/texture/neptunus.png');
+const neptuneMaterial = new THREE.MeshPhongMaterial({
+    map: neptuneTexture,
+ });
+
+const neptune = new THREE.Mesh( neptuneGeo, neptuneMaterial );
+neptune.position.x= 3;
+cube.add( neptune );
+
+const ringGeo = new THREE.TorusGeometry( 2, 0.07, 16, 100 );
+const ringTexture = textureLoader.load('resources/texture/ring.png');
+const ringMaterial = new THREE.MeshPhongMaterial({
+    map: ringTexture,
+});
+const ring = new THREE.Mesh( ringGeo, ringMaterial );
+ring.rotation.x = 5;
+neptune.add( ring );
+
+
+
+class CustomSinCurve extends THREE.Curve {
+   constructor( scale = 1 ) {
+      super();
+      this.scale = scale;
+   }
+
+   getPoint( t, optionalTarget = new THREE.Vector3() ) {
+      const tx = t * 3 - 1.5;
+      const ty = Math.sin( 2 * Math.PI * t );
+      const tz = 0;
+      return optionalTarget.set( tx, ty, tz ).multiplyScalar( this.scale );
+   }
+}
+
+const path = new CustomSinCurve( 5 );
+const tubeGeo =  new THREE.TubeGeometry( path, 10, 1, 4, false );
+const wireframe = new THREE.WireframeGeometry( tubeGeo );
+const line = new THREE.LineSegments( wireframe );
+line.material.depthTest = false;
+line.material.opacity = 0.25;
+line.material.transparent = true;
+scene.add( line );
+camera.position.z = 6;
+
+function animate() {
+   requestAnimationFrame( animate );
+   cube.rotation.y += 0.01;
+   earth.rotation.y += 0.03;
+   moon.rotation.y += 0.01;
+   neptune.rotation.y += 0.01;
+   ring.rotation.z += 0.1;
+   
+   light.intensity = light.intensity > 1 ? light.intensity -= 0.005:light.intensity += 0.005;
+   renderer.render( scene, camera );
+}
+animate();
+
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
 </body>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 </html>

@@ -1,92 +1,71 @@
-class ThreeJSBoot{
+class ThreeJSBoot {
 	renderer;
 	scene;
 	camera;
 	light;
 	controls;
 	
+	loadFont(fontUrl){
+		const loader = new THREE.FontLoader();
+		return new Promise(resolve => {
+			loader.load(fontUrl,resolve);
+		})
+	}
+
 	createStage(htmlElement){
 		this.scene = new THREE.Scene();
-		this.#setRenderar(htmlElement);
-		this.#setCamera(htmlElement);
-		this.#setLight();
-		this.#setControls();
+		this.#createRenderer(htmlElement);
+		this.#createCamera(htmlElement);
+		this.#createLight();
+		this.#createControls();
 	}
 	
-	#setRenderar(htmlElement){
+	#createRenderer(htmlElement){
 		this.renderer = new THREE.WebGLRenderer();
-		this.renderer.setSize( htmlElement.clientWidth, htmlElement.clientHeight );
-		htmlElement.appendChild(this.renderer.domElement);
+		this.renderer.setSize( htmlElement.clientWidth, htmlElement.clientHeight);
+		htmlElement.appendChild( this.renderer.domElement );
 	}
 	
-	#setCamera(htmlElement){
-		this.camera = new THREE.PerspectiveCamera( 75, htmlElement.clientWidth / htmlElement.clientHeight, 0.1, 1000 );
-		this.camera.position.z = 8;
+	#createCamera(htmlElement){
+		this.camera = new THREE.PerspectiveCamera(90, htmlElement.clientWidth / htmlElement.clientHeight, 0.1, 1000 );
+		this.camera.position.set( 0, 0, 0);
+		this.camera.position.z = 6;
 	}
 	
-	#setLight(){
-		  this.light = new THREE.DirectionalLight('white', 1);
-		  this.light.position.set(-1, 2, 4);
-		  this.scene.add(this.light);
+	#createLight(){
+		const color = 0xFFFFFF;
+		this.light = new THREE.DirectionalLight(color,1);
+		this.light.position.set(-1, 2, 4);
+		this.scene.add( this.light );
 	}
 	
-	#setControls(){
-		this.controls = new THREE.OrbitControls(this.camera, this.renderer.domElement);
-		this.controls.target.set(0, 0, 0);
+	#createControls(){
+		this.controls = new THREE.OrbitControls( this.camera, this.renderer.domElement );
 		this.controls.update();
 	}
 	
-	createObject(geometry,property,material){
+	createObject3D(geometry,property,material){
 		let mashMaterial = material?material:new THREE.MeshPhongMaterial(property);
-		return new THREE.Mesh(geometry,mashMaterial);		
+		return new THREE.Mesh(geometry, mashMaterial);		
 	}
 	
-	
-	#loadFont(url){
-		return new Promise((resolve) =>{
-			new THREE.FontLoader().load(url,resolve)
-		})		
+	//'resources/models/apollo/apollo.mtl'
+	async createObjectFrom3DModel(mtlUrl, objUrl){
+		let mtl = await this.#loadMtlFile(mtlUrl);
+		return await this.#loadObjFile(mtl,objUrl);
 	}
 	
-	createText(url,text,color,size,height,material){
-		//async함수는 return값이 있을 경우 return값을 resolve하는 promise를 반환한다.
-		let asyncText = async () =>{
-			let font = await this.#loadFont(url);
-			const geometry = new THREE.TextGeometry(text, {
-					font: font,
-					size: size?size:1,
-					height: height?height:0.3,
-					curveSegments: 12			
-			});
-			
-			const meshMaterial = material?material:new THREE.MeshPhongMaterial({color: color});
-			return new THREE.Mesh(geometry,meshMaterial);
-		}
-		
-		return asyncText();
-	}
-	
-	createObjectFromObj(objUrl,mtlUrl){
-		let asyncObj = async () =>{
-			let mtl = await this.#loadMtl(mtlUrl);
-			return await this.#loadObj(objUrl,mtl);
-		}
-		
-		return asyncObj();
-	}
-	
-	#loadMtl(url){
-		return new Promise(resolve =>{
-			new THREE.MTLLoader().load(url,resolve);
+	#loadMtlFile(mtlUrl){
+		return new Promise(resolve => {
+			new THREE.MTLLoader().load(mtlUrl, resolve);
 		})
 	}
 	
-	#loadObj(url,mtl){
-		 mtl.preload();
-	     const objLoader = new THREE.OBJLoader();
-		 objLoader.setMaterials(mtl);
-		 return new Promise(resolve => {
-			objLoader.load(url,resolve);
+	#loadObjFile(mtl, objUrl){
+		return new Promise(resolve => {
+			let objLoader = new THREE.OBJLoader();
+			objLoader.setMaterials(mtl);
+			objLoader.load(objUrl, resolve);
 		})
 	}
 	
@@ -99,6 +78,8 @@ class ThreeJSBoot{
 	
 	
 	
+	
+
 	
 	
 	
